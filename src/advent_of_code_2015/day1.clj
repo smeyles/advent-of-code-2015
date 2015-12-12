@@ -2,7 +2,7 @@
   (:require [clojure.java.io :as io]))
 
 (defn run []
-  (let [input (slurp (io/resource "input.txt"))
+  (let [input (slurp (io/resource "day1.txt"))
         steps (map #(case %1 \( 1 \) -1 0) input)]
     (println (reduce + steps))
     (println
