@@ -14,6 +14,7 @@
   (let [move (offset c) head (first positions)]
     (conj positions {:x (+ (:x move) (:x head)) :y (+ (:y move) (:y head))})))
 
+; bah - couldn't find/discover take-nth
 (defn uninterleave-n
   ([coll]
     (uninterleave-n coll 2 0))
