@@ -21,6 +21,5 @@
 
 (defn run []
   (with-open [rdr (io/reader (io/resource "day8.txt"))]
-    (println (reduce + (map overhead' (line-seq rdr))))
-    ))
+    (println (reduce + (map overhead' (line-seq rdr))))))
 
