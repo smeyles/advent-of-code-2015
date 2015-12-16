@@ -2,6 +2,9 @@
   (:require [clojure.java.io :as io]))
 
 (defn run []
-  (let [las (fn [p _] (reduce #(str %1 (count %2) (first %2)) "" (partition-by identity p)))]
+  (let [las (fn [p _] (->> (partition-by identity p)
+                           (map #(identity [(count %) (first %)]))
+                           flatten
+                           (apply str)))]
     (count (reduce las "1113222113" (range 50)))))
 
