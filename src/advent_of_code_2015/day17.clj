@@ -24,14 +24,20 @@
              (next t'))
       n)))
 
+(defn bottles [s]
+  (count (filter #(= 1 %) s)))
+
 (defn exact [litres sizes n]
-  (= litres (mmult sizes (padl (count sizes) 0 (bit-stream n)))))
+  (let [b (bit-stream n)]
+  [(bottles b) (= litres (mmult sizes (padl (count sizes) 0 b)))]))
 
 (defn run []
   (with-open [rdr (io/reader (io/resource "day17.txt"))]
     (let [sizes (map #(Integer/parseInt %) (line-seq rdr))]
-      (count 
+      (reduce
+        (fn [r [bottles _]] (assoc r bottles (inc (get r bottles 0))))
+        (into (sorted-map) {}) 
         (filter
-          identity
+          (fn [[bottles exact-fit]] exact-fit)
           (map (partial exact 150 sizes) (range 1 (bit-shift-left 1 (count sizes)))))))))
 

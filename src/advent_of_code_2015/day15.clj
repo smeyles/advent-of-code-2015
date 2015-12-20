@@ -11,18 +11,22 @@
          (max 0))))
 
 (defn score [allocs ingredients]
-  (reduce
-    *
-    (map #(measure-score allocs ingredients %) (filter #(not= :calories %) measures))))
+  [
+    (reduce
+      *
+      (map #(measure-score allocs ingredients %) (filter #(not= :calories %) measures)))
+    (measure-score allocs ingredients :calories) 
+  ])
 
 (defn optimize
   ([capacity unresolved ingredients] (optimize capacity 0 {} unresolved ingredients))
   ([capacity alloced resolved unresolved ingredients]
    (let [i (first unresolved)]
      (if (= (count unresolved) 1)
-       (let [r (assoc resolved i (- capacity alloced))]
+       (let [r (assoc resolved i (- capacity alloced))
+             s (score r ingredients)]
          ;(assoc r :score (score r ingredients))
-         (score r ingredients)) 
+         (if (= (second s)500) (first s) 0))
        (;flatten
         apply max
          (map

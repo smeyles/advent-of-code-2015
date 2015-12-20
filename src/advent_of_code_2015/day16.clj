@@ -28,8 +28,14 @@
              "cars" 2
              "perfumes" 1})
 
+(defn match? [m n item]
+  (case item
+    ("cat" "trees") (> m n)
+    ("pomeranians" "goldfish") (< m n)
+    (= m n)))
+
 (defn match [[s items]]
-  (reduce (fn [r [item count]] (and r (= count (get memory item)))) true items))
+  (reduce (fn [r [item count]] (and r (match? count (get memory item) item))) true items))
 
 (defn run []
   (filter match (load' "day16.txt")))
