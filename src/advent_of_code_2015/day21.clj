@@ -48,5 +48,4 @@
                     {:cost (first p)
                      :win (win? (vector my-health (second p) (last p)) boss)})))]
       ; (->> r (filter :win) (map :cost) (apply min))
-      (->> r (filter (complement :win)) (map :cost) (apply max))
-    ))
+      (->> r (filter (complement :win)) (map :cost) (apply max))))
