@@ -46,7 +46,7 @@
                     (update :armour + (:armour %))))))))
 
 (defn sim
-  ([boss wiz hard] (sim boss wiz LOSER {} 0 0 true true))
+  ([boss wiz hard] (sim boss wiz LOSER {} 0 0 true hard))
   ([boss wiz best casts depth spent players-turn hard]
    (let [wiz (if (and hard players-turn) (update wiz :health - 1) wiz)]
      (if (= 0 (:health wiz))
