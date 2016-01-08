@@ -69,6 +69,6 @@
                     (sim boss' wiz'' best casts' (inc depth) spent true hard)))))))))
 
 (defn run []
-  (sim boss wiz false) 
+  ; (sim boss wiz false) 
   (sim boss wiz true))
 
